@@ -6,6 +6,7 @@ import "./Home.css";
 import { API } from "aws-amplify";
 import { BsPencilSquare } from "react-icons/bs";
 import { LinkContainer } from "react-router-bootstrap";
+import Spinner from 'react-bootstrap/Spinner';
 
 export default function Home() {
   const [notes, setNotes] = useState([]);
@@ -72,7 +73,7 @@ export default function Home() {
     return (
       <div className="notes">
         <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
-        <ListGroup>{!isLoading && renderNotesList(notes)}</ListGroup>
+        <ListGroup>{isLoading ? <Spinner animation="grow" /> : renderNotesList(notes)}</ListGroup>
       </div>
     );
   }

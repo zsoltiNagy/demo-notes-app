@@ -7,6 +7,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import BillingForm from "../components/BillingForm";
 import "./Settings.css";
+import { LinkContainer } from "react-router-bootstrap";
+import LoaderButton from "../components/LoaderButton";
 
 export default function Settings() {
   const nav = useNavigate();
@@ -44,6 +46,17 @@ export default function Settings() {
   
   return (
     <div className="Settings">
+      <LinkContainer to="/settings/email">
+        <LoaderButton block bsSize="large">
+          Change Email
+        </LoaderButton>
+      </LinkContainer>
+      <LinkContainer to="/settings/password">
+        <LoaderButton block bsSize="large">
+          Change Password
+        </LoaderButton>
+      </LinkContainer>
+      <hr />
       <Elements
         stripe={stripePromise}
         fonts={[

@@ -54,7 +54,7 @@ export default function BillingForm({ isLoading, onSubmit }: BillingFormProps) {
 
   return (
     <Form className="BillingForm" onSubmit={handleSubmitClick}>
-      <Form.Group bsPrefix="form-group-lg" controlId="storage">
+      <Form.Group className="form-group-lg" controlId="storage">
         <Form.Label>Storage</Form.Label>
         <Form.Control
           min="0"
@@ -65,7 +65,7 @@ export default function BillingForm({ isLoading, onSubmit }: BillingFormProps) {
         />
       </Form.Group>
       <hr />
-      <Form.Group bsPrefix="form-group-lg" controlId="name">
+      <Form.Group className="form-group-lg" controlId="name">
         <Form.Label>Cardholder&apos;s name</Form.Label>
         <Form.Control
           type="text"

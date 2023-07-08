@@ -66,7 +66,7 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group bsPrefix="form-group-lg" controlId="confirmationCode">
+        <Form.Group className="form-group-lg" controlId="confirmationCode">
           <Form.Label>Confirmation Code</Form.Label>
           <Form.Control
             autoFocus
@@ -92,7 +92,7 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-        <Form.Group bsPrefix="form-group-lg" controlId="email">
+        <Form.Group className="form-group-lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
@@ -101,7 +101,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group bsPrefix="form-group-lg" controlId="password">
+        <Form.Group className="form-group-lg" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -109,7 +109,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group bsPrefix="form-group-lg" controlId="confirmPassword">
+        <Form.Group className="form-group-lg" controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"

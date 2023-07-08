@@ -72,7 +72,7 @@ export default function ResetPassword() {
   function renderRequestCodeForm() {
     return (
       <form onSubmit={handleSendCodeClick}>
-        <FormGroup bsPrefix="form-group-lg" controlId="email">
+        <FormGroup className="form-group-lg" controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -96,7 +96,7 @@ export default function ResetPassword() {
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsPrefix="form-group-lg" controlId="code">
+        <FormGroup className="form-group-lg" controlId="code">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
@@ -109,7 +109,7 @@ export default function ResetPassword() {
           </FormText>
         </FormGroup>
         <hr />
-        <FormGroup bsPrefix="form-group-lg" controlId="password">
+        <FormGroup className="form-group-lg" controlId="password">
           <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
@@ -117,7 +117,7 @@ export default function ResetPassword() {
             onChange={handleFieldChange}
           />
         </FormGroup>
-        <FormGroup bsPrefix="form-group-lg" controlId="confirmPassword">
+        <FormGroup className="form-group-lg" controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"

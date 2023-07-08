@@ -47,7 +47,7 @@ export default function ChangePassword() {
   return (
     <div className="ChangePassword">
       <form onSubmit={handleChangeClick}>
-        <FormGroup bsPrefix="form-group-lg" controlId="oldPassword">
+        <FormGroup className="form-group-lg" controlId="oldPassword">
           <FormLabel>Old Password</FormLabel>
           <FormControl
             type="password"
@@ -56,7 +56,7 @@ export default function ChangePassword() {
           />
         </FormGroup>
         <hr />
-        <FormGroup bsPrefix="form-group-lg" controlId="password">
+        <FormGroup className="form-group-lg" controlId="password">
           <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
@@ -64,7 +64,7 @@ export default function ChangePassword() {
             value={fields.password}
           />
         </FormGroup>
-        <FormGroup bsPrefix="form-group-lg" controlId="confirmPassword">
+        <FormGroup className="form-group-lg" controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"

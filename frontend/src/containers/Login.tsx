@@ -37,7 +37,7 @@ export default function Login() {
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
-        <Form.Group bsPrefix="form-group-lg" controlId="email">
+        <Form.Group className="form-group-lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
@@ -46,7 +46,7 @@ export default function Login() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group bsPrefix="form-group-lg" controlId="password">
+        <Form.Group className="form-group-lg" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"

@@ -63,7 +63,7 @@ export default function ChangeEmail() {
   function renderUpdateForm() {
     return (
       <form onSubmit={handleUpdateClick}>
-        <FormGroup bsPrefix="form-group-lg" controlId="email">
+        <FormGroup className="form-group-lg" controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -87,7 +87,7 @@ export default function ChangeEmail() {
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsPrefix="form-group-lg" controlId="code">
+        <FormGroup className="form-group-lg" controlId="code">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus

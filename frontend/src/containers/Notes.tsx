@@ -1,10 +1,10 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { API, Storage } from "aws-amplify";
 import { onError } from "../lib/errorLib";
 import Form from "react-bootstrap/Form";
 import LoaderButton from "../components/LoaderButton";
-import config from "../config.ts";
+import config from "../config";
 import "./Notes.css";
 import { s3Upload } from "../lib/awsLib";
 
@@ -19,7 +19,7 @@ export default function Notes() {
 
   useEffect(() => {
     function loadNote() {
-      return API.get("notes", `/notes/${id}`);
+      return API.get("notes", `/notes/${id}`, {});
     }
 
     async function onLoad() {
@@ -45,21 +45,25 @@ export default function Notes() {
     return content.length > 0;
   }
 
-  function formatFilename(str) {
+  function formatFilename(str: string) {
     return str.replace(/^\w+-/, "");
   }
 
-  function handleFileChange(event) {
-    file.current = event.target.files[0];
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files[0]) {
+      file.current = fileInput.files[0];
+    }
   }
+  
 
-  function saveNote(note) {
+  function saveNote(note: { content: string; attachment: any; }) {
     return API.put("notes", `/notes/${id}`, {
       body: note,
     });
   }
   
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     let attachment;
   
     event.preventDefault();
@@ -92,15 +96,13 @@ export default function Notes() {
   }
 
   function deleteNote() {
-    return API.del("notes", `/notes/${id}`);
+    return API.del("notes", `/notes/${id}`, {});
   }
   
-  async function handleDelete(event) {
+  async function handleDelete(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
   
-    const confirmed = window.confirm(
-      "Are you sure you want to delete this note?"
-    );
+    const confirmed = window.confirm("Are you sure you want to delete this note?");
   
     if (!confirmed) {
       return;
@@ -144,7 +146,6 @@ export default function Notes() {
             <Form.Control onChange={handleFileChange} type="file" />
           </Form.Group>
           <LoaderButton
-            block="true"
             size="lg"
             type="submit"
             isLoading={isLoading}
@@ -153,7 +154,6 @@ export default function Notes() {
             Save
           </LoaderButton>
           <LoaderButton
-            block="true"
             size="lg"
             variant="danger"
             onClick={handleDelete}

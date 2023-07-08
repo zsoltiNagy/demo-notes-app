@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import {
@@ -22,15 +22,15 @@ export default function ChangeEmail() {
   const [isConfirming, setIsConfirming] = useState(false);
   const [isSendingCode, setIsSendingCode] = useState(false);
 
-  function validateEmailForm() {
+  function validateEmailForm(): boolean {
     return fields.email.length > 0;
   }
 
-  function validateConfirmForm() {
+  function validateConfirmForm(): boolean {
     return fields.code.length > 0;
   }
 
-  async function handleUpdateClick(event) {
+  async function handleUpdateClick(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsSendingCode(true);
@@ -45,7 +45,7 @@ export default function ChangeEmail() {
     }
   }
 
-  async function handleConfirmClick(event) {
+  async function handleConfirmClick(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsConfirming(true);
@@ -63,7 +63,7 @@ export default function ChangeEmail() {
   function renderUpdateForm() {
     return (
       <form onSubmit={handleUpdateClick}>
-        <FormGroup bsSize="large" controlId="email">
+        <FormGroup bsPrefix="form-group-lg" controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -73,9 +73,8 @@ export default function ChangeEmail() {
           />
         </FormGroup>
         <LoaderButton
-          block
           type="submit"
-          bsSize="large"
+          size="lg"
           isLoading={isSendingCode}
           disabled={!validateEmailForm()}
         >
@@ -88,7 +87,7 @@ export default function ChangeEmail() {
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsSize="large" controlId="code">
+        <FormGroup bsPrefix="form-group-lg" controlId="code">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
@@ -101,9 +100,8 @@ export default function ChangeEmail() {
           </FormText>
         </FormGroup>
         <LoaderButton
-          block
           type="submit"
-          bsSize="large"
+          size="lg"
           isLoading={isConfirming}
           disabled={!validateConfirmForm()}
         >

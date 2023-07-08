@@ -2,40 +2,52 @@ import React, { useState } from "react";
 import { API } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { onError } from "../lib/errorLib";
-import config from "../config.ts";
-import { loadStripe } from "@stripe/stripe-js";
+import config from "../config";
+import { loadStripe, Stripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import BillingForm from "../components/BillingForm";
 import "./Settings.css";
 import { LinkContainer } from "react-router-bootstrap";
 import LoaderButton from "../components/LoaderButton";
 
+interface Token {
+  id: string;
+}
+
+interface UserDetails {
+  storage: string;
+  source: string;
+}
+
 export default function Settings() {
   const nav = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  const stripePromise = loadStripe(config.STRIPE_KEY);
+  const stripePromise = loadStripe(config.STRIPE_KEY) as Promise<Stripe | null>;
 
-  function billUser(details) {
+  function billUser(details: UserDetails) {
     return API.post("notes", "/billing", {
       body: details,
     });
   }
 
-  async function handleFormSubmit(storage, { token, error }) {
+  async function handleFormSubmit(
+    storage: string,
+    { token, error }: { token: Token | null; error: any }
+  ) {
     if (error) {
       onError(error);
       return;
     }
-  
+
     setIsLoading(true);
-  
+
     try {
       await billUser({
         storage,
-        source: token.id,
+        source: token!.id,
       });
-  
+
       alert("Your card has been charged successfully!");
       nav("/");
     } catch (e) {
@@ -43,29 +55,21 @@ export default function Settings() {
       setIsLoading(false);
     }
   }
-  
+
   return (
     <div className="Settings">
       <LinkContainer to="/settings/email">
-        <LoaderButton block bsSize="large">
+        <LoaderButton size="lg">
           Change Email
         </LoaderButton>
       </LinkContainer>
       <LinkContainer to="/settings/password">
-        <LoaderButton block bsSize="large">
+        <LoaderButton size="lg">
           Change Password
         </LoaderButton>
       </LinkContainer>
       <hr />
-      <Elements
-        stripe={stripePromise}
-        fonts={[
-          {
-            cssSrc:
-              "https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800",
-          },
-        ]}
-      >
+      <Elements stripe={stripePromise}>
         <BillingForm isLoading={isLoading} onSubmit={handleFormSubmit} />
       </Elements>
     </div>

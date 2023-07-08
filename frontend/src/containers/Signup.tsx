@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
@@ -32,7 +32,7 @@ export default function Signup() {
     return fields.confirmationCode.length > 0;
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
     try {
@@ -43,13 +43,13 @@ export default function Signup() {
       setIsLoading(false);
       setNewUser(newUser);
     } catch (e) {
-      console.log("handleSubmit: ", e)
-        onError(e);
+      console.log("handleSubmit: ", e);
+      onError(e);
       setIsLoading(false);
     }
   }
 
-  async function handleConfirmationSubmit(event) {
+  async function handleConfirmationSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
     try {
@@ -66,7 +66,7 @@ export default function Signup() {
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
-        <Form.Group controlId="confirmationCode" size="lg">
+        <Form.Group bsPrefix="form-group-lg" controlId="confirmationCode">
           <Form.Label>Confirmation Code</Form.Label>
           <Form.Control
             autoFocus
@@ -77,7 +77,6 @@ export default function Signup() {
           <Form.Text muted>Please check your email for the code.</Form.Text>
         </Form.Group>
         <LoaderButton
-          block="true"
           size="lg"
           type="submit"
           variant="success"
@@ -93,7 +92,7 @@ export default function Signup() {
   function renderForm() {
     return (
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
+        <Form.Group bsPrefix="form-group-lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
             autoFocus
@@ -102,7 +101,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group controlId="password" size="lg">
+        <Form.Group bsPrefix="form-group-lg" controlId="password">
           <Form.Label>Password</Form.Label>
           <Form.Control
             type="password"
@@ -110,7 +109,7 @@ export default function Signup() {
             onChange={handleFieldChange}
           />
         </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
+        <Form.Group bsPrefix="form-group-lg" controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
@@ -119,7 +118,6 @@ export default function Signup() {
           />
         </Form.Group>
         <LoaderButton
-          block="true"
           size="lg"
           type="submit"
           variant="success"

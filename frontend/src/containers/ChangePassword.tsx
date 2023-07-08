@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { Auth } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { FormGroup, FormControl, FormLabel } from "react-bootstrap";
@@ -16,7 +16,7 @@ export default function ChangePassword() {
   });
   const [isChanging, setIsChanging] = useState(false);
 
-  function validateForm() {
+  function validateForm(): boolean {
     return (
       fields.oldPassword.length > 0 &&
       fields.password.length > 0 &&
@@ -24,7 +24,7 @@ export default function ChangePassword() {
     );
   }
 
-  async function handleChangeClick(event) {
+  async function handleChangeClick(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsChanging(true);
@@ -47,7 +47,7 @@ export default function ChangePassword() {
   return (
     <div className="ChangePassword">
       <form onSubmit={handleChangeClick}>
-        <FormGroup bsSize="large" controlId="oldPassword">
+        <FormGroup bsPrefix="form-group-lg" controlId="oldPassword">
           <FormLabel>Old Password</FormLabel>
           <FormControl
             type="password"
@@ -56,7 +56,7 @@ export default function ChangePassword() {
           />
         </FormGroup>
         <hr />
-        <FormGroup bsSize="large" controlId="password">
+        <FormGroup bsPrefix="form-group-lg" controlId="password">
           <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
@@ -64,7 +64,7 @@ export default function ChangePassword() {
             value={fields.password}
           />
         </FormGroup>
-        <FormGroup bsSize="large" controlId="confirmPassword">
+        <FormGroup bsPrefix="form-group-lg" controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
@@ -73,9 +73,8 @@ export default function ChangePassword() {
           />
         </FormGroup>
         <LoaderButton
-          block
           type="submit"
-          bsSize="large"
+          size="lg"
           disabled={!validateForm()}
           isLoading={isChanging}
         >

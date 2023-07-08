@@ -4,7 +4,7 @@ import { BsArrowRepeat } from "react-icons/bs";
 import "./LoaderButton.css";
 
 interface LoaderButtonProps extends ButtonProps {
-  isLoading: boolean;
+  isLoading?: boolean;
   className?: string;
   disabled?: boolean;
   children: React.ReactNode;

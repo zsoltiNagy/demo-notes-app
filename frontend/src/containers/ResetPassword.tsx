@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import { Auth } from "aws-amplify";
 import { Link } from "react-router-dom";
 import {
@@ -37,7 +37,7 @@ export default function ResetPassword() {
     );
   }
 
-  async function handleSendCodeClick(event) {
+  async function handleSendCodeClick(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsSendingCode(true);
@@ -51,7 +51,7 @@ export default function ResetPassword() {
     }
   }
 
-  async function handleConfirmClick(event) {
+  async function handleConfirmClick(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     setIsConfirming(true);
@@ -72,7 +72,7 @@ export default function ResetPassword() {
   function renderRequestCodeForm() {
     return (
       <form onSubmit={handleSendCodeClick}>
-        <FormGroup bsSize="large" controlId="email">
+        <FormGroup bsPrefix="form-group-lg" controlId="email">
           <FormLabel>Email</FormLabel>
           <FormControl
             autoFocus
@@ -82,9 +82,8 @@ export default function ResetPassword() {
           />
         </FormGroup>
         <LoaderButton
-          block
           type="submit"
-          bsSize="large"
+          size="lg"
           isLoading={isSendingCode}
           disabled={!validateCodeForm()}
         >
@@ -97,7 +96,7 @@ export default function ResetPassword() {
   function renderConfirmationForm() {
     return (
       <form onSubmit={handleConfirmClick}>
-        <FormGroup bsSize="large" controlId="code">
+        <FormGroup bsPrefix="form-group-lg" controlId="code">
           <FormLabel>Confirmation Code</FormLabel>
           <FormControl
             autoFocus
@@ -110,7 +109,7 @@ export default function ResetPassword() {
           </FormText>
         </FormGroup>
         <hr />
-        <FormGroup bsSize="large" controlId="password">
+        <FormGroup bsPrefix="form-group-lg" controlId="password">
           <FormLabel>New Password</FormLabel>
           <FormControl
             type="password"
@@ -118,7 +117,7 @@ export default function ResetPassword() {
             onChange={handleFieldChange}
           />
         </FormGroup>
-        <FormGroup bsSize="large" controlId="confirmPassword">
+        <FormGroup bsPrefix="form-group-lg" controlId="confirmPassword">
           <FormLabel>Confirm Password</FormLabel>
           <FormControl
             type="password"
@@ -127,9 +126,8 @@ export default function ResetPassword() {
           />
         </FormGroup>
         <LoaderButton
-          block
           type="submit"
-          bsSize="large"
+          size="lg"
           isLoading={isConfirming}
           disabled={!validateResetForm()}
         >

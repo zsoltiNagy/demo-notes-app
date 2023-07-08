@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, FormEvent, ChangeEvent} from "react";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import { onError } from "../lib/errorLib";
-import config from "../config.ts";
+import config from "../config";
 import "./NewNote.css";
 import { API } from "aws-amplify";
 import { s3Upload } from "../lib/awsLib";
@@ -18,11 +18,11 @@ export default function NewNote() {
     return content.length > 0;
   }
 
-  function handleFileChange(event) {
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     file.current = event.target.files[0];
   }
 
-  async function handleSubmit(event) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
   
     if (file.current && file.current.size > config.MAX_ATTACHMENT_SIZE) {
@@ -47,7 +47,7 @@ export default function NewNote() {
     }
   }
   
-  function createNote(note) {
+  function createNote(note: { content: string; attachment: string; }) {
     return API.post("notes", "/notes", {
       body: note,
     });
@@ -68,7 +68,6 @@ export default function NewNote() {
           <Form.Control onChange={handleFileChange} type="file" />
         </Form.Group>
         <LoaderButton
-          block
           type="submit"
           size="lg"
           variant="primary"

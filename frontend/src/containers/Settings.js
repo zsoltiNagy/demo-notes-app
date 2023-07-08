@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { API } from "aws-amplify";
 import { useNavigate } from "react-router-dom";
 import { onError } from "../lib/errorLib";
-import config from "../config";
+import config from "../config.ts";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import BillingForm from "../components/BillingForm";

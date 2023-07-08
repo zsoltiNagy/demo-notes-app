@@ -20,7 +20,7 @@ export default function UnauthenticatedRoute(props: any): JSX.Element {
   const redirect = querystring("redirect");
 
   if (isAuthenticated) {
-    return <Navigate to={redirect?.toString() || "/"} />;
+    return <Navigate to={(redirect && redirect?.toString()) || "/"} />;
   }
 
   return cloneElement(children, props);

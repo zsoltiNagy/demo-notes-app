@@ -2,7 +2,7 @@ import { Table } from "sst/node/table";
 import handler from "@notes/core/handler";
 import dynamoDb from "@notes/core/dynamodb";
 
-export const main = handler(async (event) => {
+export const main = handler(async (event: { requestContext: { authorizer: { iam: { cognitoIdentity: { identityId: any; }; }; }; }; }) => {
   const params = {
     TableName: Table.Notes.tableName,
     // 'KeyConditionExpression' defines the condition for the query

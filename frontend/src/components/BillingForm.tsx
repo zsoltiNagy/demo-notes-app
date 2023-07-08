@@ -5,7 +5,12 @@ import LoaderButton from "./LoaderButton";
 import { useFormFields } from "../lib/hooksLib";
 import "./BillingForm.css";
 
-export default function BillingForm({ isLoading, onSubmit }) {
+interface BillingFormProps {
+  isLoading: boolean;
+  onSubmit: (storage: string, data: { token: any; error: any }) => void;
+}
+
+export default function BillingForm({ isLoading, onSubmit }: BillingFormProps) {
   const stripe = useStripe();
   const elements = useElements();
   const [fields, handleFieldChange] = useFormFields({
@@ -27,7 +32,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
     );
   }
 
-  async function handleSubmitClick(event) {
+  async function handleSubmitClick(event: React.FormEvent) {
     event.preventDefault();
 
     if (!stripe || !elements) {
@@ -49,7 +54,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
 
   return (
     <Form className="BillingForm" onSubmit={handleSubmitClick}>
-      <Form.Group size="lg" controlId="storage">
+      <Form.Group bsPrefix="form-group-lg" controlId="storage">
         <Form.Label>Storage</Form.Label>
         <Form.Control
           min="0"
@@ -60,7 +65,7 @@ export default function BillingForm({ isLoading, onSubmit }) {
         />
       </Form.Group>
       <hr />
-      <Form.Group size="lg" controlId="name">
+      <Form.Group bsPrefix="form-group-lg" controlId="name">
         <Form.Label>Cardholder&apos;s name</Form.Label>
         <Form.Control
           type="text"
@@ -85,7 +90,6 @@ export default function BillingForm({ isLoading, onSubmit }) {
         }}
       />
       <LoaderButton
-        block="true"
         size="lg"
         type="submit"
         isLoading={isLoading}

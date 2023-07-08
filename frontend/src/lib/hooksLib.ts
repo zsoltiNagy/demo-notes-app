@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export function useFormFields(initialState: { email?: string; password?: string; confirmPassword?: string; confirmationCode?: string; name?: string; storage?: string; code?: string; oldPassword?: string; }) {
-  const [fields, setValues] = useState(initialState);
+export function useFormFields<T>(initialState: T): [T, (event: React.ChangeEvent<HTMLInputElement>) => void] {
+  const [fields, setValues] = useState<T>(initialState);
 
   return [
     fields,
-    function (event: { target: { id: any; value: any; }; }) {
+    function (event: React.ChangeEvent<HTMLInputElement>) {
       setValues({
         ...fields,
         [event.target.id]: event.target.value,

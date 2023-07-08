@@ -76,7 +76,7 @@ export default function Links() {
       <Route
         path="/settings/email"
         element={
-          <AuthenticatedRoute exact path="/settings/email">
+          <AuthenticatedRoute>
             <ChangeEmail />
           </AuthenticatedRoute>
         }

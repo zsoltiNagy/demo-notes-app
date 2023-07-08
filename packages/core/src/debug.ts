@@ -1,7 +1,7 @@
 import util from "util";
 import AWS from "aws-sdk";
 
-let logs;
+let logs: { date: any; string: string; }[];
 
 // Log AWS SDK calls
 AWS.config.logger = { log: debug };
@@ -13,7 +13,7 @@ export default function debug() {
   });
 }
 
-export function init(event) {
+export function init(event: any) {
   logs = [];
 
   // Log API event

@@ -1,6 +1,6 @@
-import { Bucket, Table } from "sst/constructs";
+import { Bucket, Table, StackContext } from "sst/constructs";
 
-export function StorageStack({ stack, app }) {
+export function StorageStack({ stack, app }: StackContext) {
   // Create an S3 bucket
   const bucket = new Bucket(stack, "Uploads", {
     cors: [

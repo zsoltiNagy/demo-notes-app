@@ -1,7 +1,7 @@
-import { Api, use } from "sst/constructs";
+import { Api, use, StackContext } from "sst/constructs";
 import { StorageStack } from "./StorageStack";
 
-export function ApiStack({ stack, app }) {
+export function ApiStack({ stack, app }: StackContext) {
   const { table } = use(StorageStack);
 
   // Create the API
@@ -11,7 +11,7 @@ export function ApiStack({ stack, app }) {
       function: {
         bind: [table],
         environment: {
-            STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
+            STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY || '',
           },
       },
     },
